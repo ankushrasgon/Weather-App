@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+{% load static %}
+  <head>
+    <meta charset="utf-8">
+    <title>Weather App</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'css/weather_app.css' %}">
+  </head>
+
+
+  <body>
+    <div class="container-fluid">
+      <div class="jumbotron" style="background-color:darkcyan";>
+        <h1 style="color: white; font-style: italic;">WEATHER APP</h1>
+      </div>
+    </div>
+
+
+  <div class="container">
+    <div class="row justify-content-center">
+          <div class="col-md-4">
+            <h2> what's the weather like </h2>
+            <form method="POST" class="Post-Form">
+              {% csrf_token %}
+              {{ form.as_p }}
+              <div class="button-control">
+              <button type="submit" class="btn btn-info btn-sm">Add city</button>
+            </div>
+          </form><br>
+          </div>
+        </div>
+
+    <div class="container">
+      <div class="row">
+    {% for city_weather in weather_info %}
+    <div class="col-md-4">
+      <div class="panel panel-default">
+    <div class="panel-body">
+      <div class="media">
+         <div class="media-left">
+            <img src="http://openweathermap.org/img/w/{{ city_weather.icon }}.png" alt="Image" class="media-object" style="width:60px">
+          </div>
+         <div class="media-body">
+           <p>
+            <span class="title">{{ city_weather.city }}</span><br>
+            <span class="subtitle">{{ city_weather.temperature }}° C</span>
+            <br> {{ city_weather.description }}
+           </p>
+         </div>
+      </div>
+    </div>
+  </div>
+</div>
+    {% endfor %}
+    </div>
+  </div>
+  </div>
+</div>
+
+<!--footer-->
+  <footer class="page-footer font-small blue fixed-bottom"  style="background-color:#B4E0E5";>
+    <div class="footer-copyright text-center py-3">
+    <h6>  © 2019 Copyright:  Designed by Ankush Kumar Rasgon </h6>
+    </div>
+  </footer>
+<!--footer-->
+
+  </body>
+</html>
